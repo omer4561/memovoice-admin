@@ -3,22 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <meta name="robots" content="noindex, nofollow">
   <title>MemoVoice · ניהול</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%231f4e79'/%3E%3Ctext x='16' y='23' font-size='20' font-weight='700' text-anchor='middle' fill='%23fbfaf5' font-family='serif'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=David+Libre:wght@700&family=Playpen+Sans+Hebrew:wght@500&display=swap">
+  <link rel="stylesheet" href="tokens.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
-  <main>
-    <header>
-      <h1>MemoVoice · ניהול</h1>
+  <div class="page">
+    <header class="top">
+      <h1 class="brand"><b>MemoVoice</b><span>ניהול</span></h1>
       <div id="toolbar" class="toolbar" hidden>
+        <span id="busy" role="status"></span>
         <label class="check"><input type="checkbox" id="include-owner"> <span>כולל החשבון שלי</span></label>
         <button type="button" data-action="refresh">רענון</button>
         <button type="button" data-action="sign-out">התנתקות</button>
       </div>
     </header>
-    <div id="app" aria-live="polite"><p class="soft center">טוען...</p></div>
-  </main>
-  <script type="module" src="src/main.js?v=2"></script>
+    <main id="app" class="sheet" aria-live="polite" aria-busy="true"><p class="soft">טוען נתונים…</p></main>
+  </div>
+  <script type="module" src="src/main.js?v=3"></script>
 </body>
 </html>
