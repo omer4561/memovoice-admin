@@ -1,0 +1,24 @@
+<!doctype html>
+<html dir="rtl" lang="he">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>MemoVoice · ניהול</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>MemoVoice · ניהול</h1>
+      <div id="toolbar" class="toolbar" hidden>
+        <label class="check"><input type="checkbox" id="include-owner"> <span>כולל החשבון שלי</span></label>
+        <button type="button" data-action="refresh">רענון</button>
+        <button type="button" data-action="sign-out">התנתקות</button>
+      </div>
+    </header>
+    <div id="app" aria-live="polite"><p class="soft center">טוען...</p></div>
+  </main>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
