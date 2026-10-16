@@ -1,10 +1,10 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.2/+esm';
-// ?v=3 עוקף עותק ישן שנשמר בדפדפן (GitHub Pages שומר קבצים כ-10 דקות). להעלות כשמשנים אחד מהם.
-import { ApiError, fetchOverview, fetchTester } from './api.js?v=3';
+// ?v=4 עוקף עותק ישן שנשמר בדפדפן (GitHub Pages שומר קבצים כ-10 דקות). להעלות כשמשנים אחד מהם.
+import { ApiError, fetchOverview, fetchTester } from './api.js?v=4';
 import { SUPABASE_ANON_KEY, SUPABASE_URL } from './config.js';
 import { esc } from './format.js';
-import { renderOverview, renderTesterDetail } from './render.js?v=3';
-import { strings as s } from './strings.js?v=3';
+import { renderOverview, renderTesterDetail } from './render.js?v=4';
+import { strings as s } from './strings.js?v=4';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: { detectSessionInUrl: true, persistSession: true },

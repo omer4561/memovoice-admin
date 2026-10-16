@@ -13,23 +13,24 @@ test('Hebrew abbreviations use a geresh, not an ASCII apostrophe', () => {
 
 test('loading text uses a real ellipsis, never three periods', () => {
   assert.ok(strings.loading.includes('…'));
+  assert.ok(strings.refreshing.includes('…'));
   assert.ok(!strings.loading.includes('...'));
-});
-
-test('lede: told today, and how many need attention', () => {
-  assert.equal(strings.lede(12, 5, 2), '5 מתוך 12 בודקים סיפרו היום. 2 דורשים תשומת לב.');
-  assert.equal(strings.lede(12, 5, 1), '5 מתוך 12 בודקים סיפרו היום. אחד דורש תשומת לב.');
-  assert.equal(strings.lede(12, 5, 0), '5 מתוך 12 בודקים סיפרו היום. אף אחד לא דורש תשומת לב.');
-  assert.equal(strings.lede(12, 0, 0), 'אף אחד מ-12 הבודקים לא סיפר היום. אף אחד לא דורש תשומת לב.');
-});
-
-test('lede with nobody registered is the empty-state sentence', () => {
-  assert.equal(strings.lede(0, 0, 0), strings.testersNone);
 });
 
 test('funnel drop wording', () => {
   assert.equal(strings.funnelDrop(3), 'נשרו 3');
   assert.equal(strings.funnelDrop(0), 'אף אחד לא נשר');
+});
+
+test('registered-ago wording handles today, yesterday and older', () => {
+  assert.equal(strings.registeredAgo(0), 'נרשם היום');
+  assert.equal(strings.registeredAgo(1), 'נרשם אתמול');
+  assert.equal(strings.registeredAgo(6), 'נרשם לפני 6 ימים');
+});
+
+test('the oldest-waiting note handles zero days', () => {
+  assert.equal(strings.notStartedNote(0), 'הוותיק ביותר נרשם היום.');
+  assert.equal(strings.notStartedNote(6), 'הוותיק ביותר נרשם לפני 6 ימים.');
 });
 
 test('the threshold note states both thresholds', () => {

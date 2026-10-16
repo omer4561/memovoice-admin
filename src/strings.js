@@ -20,66 +20,63 @@ export const strings = {
   back: 'חזרה לרשימה',
 
   testersNone: 'אין עדיין בודקים. כשיירשמו, תראה אותם כאן.',
-  attentionNone: 'אף אחד לא דורש תשומת לב כרגע.',
-  lede: (registered, toldToday, attentionCount) => {
-    if (registered === 0) return strings.testersNone;
-    const told =
-      toldToday === 0 ? `אף אחד מ-${registered} הבודקים לא סיפר היום` : `${toldToday} מתוך ${registered} בודקים סיפרו היום`;
-    const attention =
-      attentionCount === 0
-        ? 'אף אחד לא דורש תשומת לב'
-        : attentionCount === 1
-          ? 'אחד דורש תשומת לב'
-          : `${attentionCount} דורשים תשומת לב`;
-    return `${told}. ${attention}.`;
-  },
 
-  attentionTitle: 'דורשים תשומת לב',
+  kpiToldToday: 'סיפרו היום',
+  kpiOf: (n) => `מתוך ${n}`,
+  kpiActive7: 'פעילים ב-7 ימים',
+  kpiNotStarted: 'עוד לא סיפרו',
+  kpiPassed: 'עברו בדיקה ראשונה',
+
+  attentionNowTitle: 'דורשים תשומת לב עכשיו',
   reasonInactive: (days) => `לא סיפר ${days} ימים`,
-  reasonNeverTold: (days) => `נרשם לפני ${days} ימים ועוד לא סיפר אף פעם`,
   reasonStuck: 'תקוע בשער הבדיקה: 3 ניסיונות בלי ציון 80',
+
+  cardsTitle: 'מי מספר',
+  cardsNone: 'אף בודק עוד לא סיפר. כשמישהו יספר, הוא יופיע כאן.',
   thresholdNote: 'סימון "מאט" אחרי 2 ימים בלי הזנה, "נעלם" אחרי 4 ימים.',
+  notStartedTitle: 'נרשמו ועוד לא סיפרו אף פעם',
+  notStartedNote: (oldestDays) => (oldestDays === 0 ? 'הוותיק ביותר נרשם היום.' : `הוותיק ביותר נרשם לפני ${oldestDays} ימים.`),
 
   funnelTitle: 'איפה אנשים נעלמים',
-  funnelStep: 'שלב',
-  funnelCount: 'בודקים',
-  funnelShare: 'מהנרשמים',
-  funnelDropCol: 'נשירה',
   funnelRegistered: 'נרשמו',
   funnelAddedBook: 'הוסיפו ספר',
   funnelToldFirst: 'סיפרו פעם ראשונה',
   funnelPassedFirst: 'עברו בדיקה ראשונה',
   funnelDrop: (n) => (n > 0 ? `נשרו ${n}` : 'אף אחד לא נשר'),
 
-  apiTitle: 'עומס קריאות לשרת, 30 הימים האחרונים',
+  apiTitle: 'עומס קריאות לשרת',
+  apiSub: '30 הימים האחרונים',
   apiNone: 'אין עדיין נתוני שימוש.',
   apiCeilingLabel: (n) => `הערכת תקרה ${n}`,
   apiCeilingNote: 'התקרה היא הערכה של מכסת Gemini היומית ולא נמדדה.',
   apiCalls: 'קריאות',
   apiDate: 'תאריך',
 
-  testersTitle: 'בודקים',
-  timeNote: 'זמן ופתיחות יופיעו כאן אחרי העדכון הבא של האפליקציה.',
-  colTester: 'בודק',
-  colStatus: 'מצב',
-  colLastEntry: 'הזנה אחרונה',
-  colSince: 'לפני',
-  colStreak: 'רצף',
-  colBooks: 'ספרים',
-  colCheck: 'בדיקת אתמול',
-  colTime: 'זמן באפליקציה',
+  timeNote: 'זמן ופתיחות יופיעו בכרטיסים אחרי העדכון הבא של האפליקציה.',
   noEmail: 'ללא מייל',
   ownerTag: 'החשבון שלי',
   neverTold: 'לא סיפר עדיין',
   today: 'היום',
   yesterday: 'אתמול',
   daysAgo: (n) => `לפני ${n} ימים`,
+  registeredAgo: (n) => (n === 0 ? 'נרשם היום' : n === 1 ? 'נרשם אתמול' : `נרשם לפני ${n} ימים`),
   streakDays: (n) => `${n} ימים`,
   pages: (from, to) => `עמ׳ ${from} עד ${to}`,
   booksCell: (started, finished) => `${started} קורא, ${finished} סיים`,
   checkNone: 'לא נבדק',
-  checkCell: (score, attempts) => `${score === null ? 'ללא ציון' : score} · ניסיונות ${attempts}`,
+  attemptsLabel: (n) => `ניסיונות ${n}`,
+  noScore: 'ללא ציון',
   timeCell: (minutes, opens) => `${minutes} דק׳ · ${opens} פתיחות`,
+  stuckChip: 'תקוע בשער',
+  stripLabel: (n) => `הזנות ב-14 הימים האחרונים: ${n}`,
+  stripCaption: '14 הימים האחרונים',
+  stripStart: 'לפני 14 ימים',
+  stripEnd: 'היום',
+  statStreak: 'רצף',
+  statBooks: 'ספרים',
+  statCheck: 'בדיקת אתמול',
+  statTime: 'זמן באפליקציה',
+  lastEntryLabel: 'הזנה אחרונה',
 
   status: {
     green: 'פעיל',
@@ -93,6 +90,7 @@ export const strings = {
   detailLastEntry: 'ההזנה האחרונה',
   detailSaid: 'מה שהבודק אמר',
   detailNoText: 'אין טקסט להזנה הזו.',
+  detailEntries: (n) => (n === 1 ? 'הזנה אחת' : `${n} הזנות`),
   colDate: 'תאריך',
   colBook: 'ספר',
   colPages: 'עמודים',

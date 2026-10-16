@@ -1,7 +1,7 @@
 /* Hallmark · tokens שנגזרו מהאפליקציה ("ספריית 2000": src/theme/palette.ts, src/theme/tokens.ts).
  * ground = החדר, paper/ink = המחברת. על הנייר משתמשים בגווני ה-Pap של הכחול, האדום והירוק.
- * שני ערכים כוונו בלילה כדי לעמוד ב-4.5:1 על הנייר: --primary ו-green-text (הערכים באפליקציה,
- * bluePap ו-greenPap, נופלים מתחת ל-4.5:1 על נייר הלילה). כל השאר זהה לאפליקציה.
+ * שני ערכים כוונו כדי לעמוד ב-4.5:1: --primary בלילה, ו---green-text (בכל המצבים, כי greenPap
+ * של האפליקציה נופל ל-4.0:1 על רקע הירוק הבהיר של תגית). כל השאר זהה לאפליקציה.
  * test/contrast.test.js מחשב את כל זוגות הטקסט והרקע, ביום ובלילה, וכושל אם ערך נשבר.
  */
 :root {
@@ -27,7 +27,7 @@
   --primary-veil: #dce8f2;
   --red-text: #b4342c;
   --red-veil: #f4dedb;
-  --green-text: #3e7d4f;
+  --green-text: #2f6b40;
   --green-veil: #ddebe0;
   --yellow: #e0a81e;
   --yellow-veil: #f6ebcc;
@@ -58,6 +58,7 @@
   --radius-lg: 6px;
 
   --ruled-line: 26px;
+  --shadow-card: 0 1px 2px color-mix(in srgb, var(--ink) 14%, transparent), 0 6px 16px color-mix(in srgb, var(--ink) 6%, transparent);
 
   /* טבעת פוקוס: על הנייר וליד הכותרת על החדר. בלילה החדר כהה, ולכן שני ערכים נפרדים. */
   --focus-paper: #1f4e79;
