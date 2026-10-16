@@ -179,7 +179,8 @@ function renderApi(data, s) {
 }
 
 export function renderOverview(data, s) {
-  const stamp = `<p class="note stamp">${esc(s.updatedAt)} ${esc(formatDateTime(data.generatedAt))}</p>`;
+  const hidden = data.hiddenAccounts > 0 ? `<p class="note stamp">${esc(s.hiddenNote(data.hiddenAccounts))}</p>` : '';
+  const stamp = `${hidden}<p class="note stamp">${esc(s.updatedAt)} ${esc(formatDateTime(data.generatedAt))}</p>`;
 
   if (data.totals.registered === 0) {
     return `<section class="empty"><p class="lede">${esc(s.testersNone)}</p></section>${renderApi(data, s)}${stamp}`;

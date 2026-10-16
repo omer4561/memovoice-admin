@@ -296,3 +296,18 @@ test('detail copes with a tester who has no entries and no email', () => {
   assert.ok(html.includes(strings.detailHistoryNone));
   assert.ok(html.includes(strings.noEmail));
 });
+
+test('hidden empty accounts are mentioned once in a quiet footer note, and only when there are some', () => {
+  const some = renderOverview(overview({ hiddenAccounts: 7, testers: [tester()] }), strings);
+  assert.ok(some.includes(esc(strings.hiddenNote(7))));
+  const none = renderOverview(overview({ hiddenAccounts: 0, testers: [tester()] }), strings);
+  assert.ok(!none.includes(strings.hiddenNote(0)));
+  const old = renderOverview(overview({ testers: [tester()] }), strings);
+  assert.ok(!old.includes('undefined'));
+});
+
+test('when only hidden accounts exist the empty state still explains why', () => {
+  const html = renderOverview(overview({ hiddenAccounts: 7, totals: { registered: 0, toldToday: 0, inactive3Plus: 0 } }), strings);
+  assert.ok(html.includes(strings.testersNone));
+  assert.ok(html.includes(esc(strings.hiddenNote(7))));
+});
