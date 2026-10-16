@@ -1,5 +1,6 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.2/+esm';
-import { ApiError, fetchOverview, fetchTester } from './api.js';
+// ?v=2 עוקף עותק ישן שנשמר בדפדפן (GitHub Pages שומר קבצים כ-10 דקות). להעלות כשמשנים api.js.
+import { ApiError, fetchOverview, fetchTester } from './api.js?v=2';
 import { SUPABASE_ANON_KEY, SUPABASE_URL } from './config.js';
 import { esc } from './format.js';
 import { renderOverview, renderTesterDetail } from './render.js';
