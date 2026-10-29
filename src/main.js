@@ -3,6 +3,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 import { ApiError, fetchOverview, fetchTester } from './api.js?v=5';
 import { SUPABASE_ANON_KEY, SUPABASE_URL } from './config.js';
 import { esc } from './format.js';
+import { fetchTasksOverview, renderTasks, reviewTemplate } from './tasks.js?v=1';
 import { renderOverview, renderTesterDetail } from './render.js?v=5';
 import { strings as s } from './strings.js?v=5';
 
@@ -16,6 +17,7 @@ const includeOwnerBox = document.getElementById('include-owner');
 const busyLabel = document.getElementById('busy');
 const refreshButton = document.querySelector('[data-action="refresh"]');
 
+const TASKS_ROUTE = /^#\/tasks$/;
 const TESTER_ROUTE = /^#\/tester\/([0-9a-f-]{36})$/i;
 const FRESH_MS = 30_000;
 
@@ -55,6 +57,7 @@ async function currentToken() {
 
 function currentRoute() {
   const match = TESTER_ROUTE.exec(location.hash);
+  if (TASKS_ROUTE.test(location.hash)) return { name: 'tasks' };
   return match ? { name: 'tester', id: match[1] } : { name: 'overview' };
 }
 
@@ -120,6 +123,20 @@ async function showTester(token, userId) {
   }
 }
 
+async function showTasks(token) {
+  setBusy(true, s.loading);
+  show(`<a class="back" href="#/">${esc(s.back)}</a><p class="soft">${esc(s.loading)}</p>`);
+  try {
+    const data = await fetchTasksOverview(token);
+    if (currentRoute().name !== 'tasks') return setBusy(false);
+    show(renderTasks(data));
+    window.scrollTo(0, 0);
+    setBusy(false);
+  } catch (error) {
+    await handleError(error);
+  }
+}
+
 async function route({ force = false } = {}) {
   const token = await currentToken();
   if (!token) return signInScreen();
@@ -129,6 +146,7 @@ async function route({ force = false } = {}) {
   if (lastRoute === 'overview' && next.name !== 'overview') overviewScroll = window.scrollY;
   lastRoute = next.name;
 
+  if (next.name === 'tasks') return showTasks(token);
   if (next.name === 'tester') return showTester(token, next.id);
   return showOverview(token, { force });
 }
@@ -146,6 +164,19 @@ document.addEventListener('click', async (event) => {
     signInScreen();
   } else if (action === 'refresh') {
     await route({ force: true });
+  } else {
+    const review = target?.closest('[data-review]');
+    if (review) {
+      const token = await currentToken();
+      if (!token) return signInScreen();
+      review.setAttribute('disabled', '');
+      try {
+        await reviewTemplate(token, review.getAttribute('data-review'), review.getAttribute('data-decision'));
+        await showTasks(token);
+      } catch (error) {
+        await handleError(error);
+      }
+    }
   }
 });
 
