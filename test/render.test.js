@@ -220,6 +220,12 @@ test('once time tracking is available each card shows time and opens', () => {
   assert.ok(!html.includes(strings.timeNote));
 });
 
+test('time tracking shows the device the tester opened the app on', () => {
+  const html = renderOverview(overview({ timeTracking: { available: true }, testers: [tester({ opens7d: 3, platforms: ['android'] })] }), strings);
+  assert.ok(html.includes(strings.statDevice));
+  assert.ok(html.includes('אנדרואיד'));
+});
+
 test('the funnel shows share of registered and the drop from the previous step', () => {
   const html = renderOverview(overview(), strings);
   for (const expected of ['100%', '83%', '67%', '42%', 'נשרו 2', 'נשרו 3']) assert.ok(html.includes(expected), expected);

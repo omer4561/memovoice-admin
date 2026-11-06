@@ -94,7 +94,7 @@ function renderCard(t, data, s, withTime) {
   const book = [t.lastEntryBook ? `<bdi>${esc(t.lastEntryBook)}</bdi>` : '', t.lastEntryPages ? esc(s.pages(t.lastEntryPages.from, t.lastEntryPages.to)) : ''].filter(Boolean).join(' · ');
   const last = `<div class="tlast"><p><span class="soft">${esc(s.lastEntryLabel)}</span> <b>${esc(sinceText(t.daysSince, s))}</b> · <span class="num">${esc(formatDate(t.lastEntryDate))}</span></p>${book ? `<p class="soft">${book}</p>` : ''}</div>`;
   const time = withTime
-    ? `<div><dt>${esc(s.statTime)}</dt><dd>${esc(s.timeCell(t.activeMinutes7d ?? 0, t.opens7d ?? 0))}</dd></div>`
+    ? `<div><dt>${esc(s.statTime)}</dt><dd>${esc(s.timeCell(t.activeMinutes7d ?? 0, t.opens7d ?? 0))}</dd></div><div><dt>${esc(s.statDevice)}</dt><dd>${esc(s.deviceCell(t.platforms))}</dd></div>`
     : '';
   return `<article class="tcard s-${esc(t.status)}">
 <header class="thead2">${avatar(t.email, t.status)}<div class="tid"><a class="tlink" href="#/tester/${esc(t.userId)}">${emailHtml(t.email, s)}</a><div class="chips-row"><span class="chip c-${esc(t.status)}">${esc(s.status[t.status] ?? '')}</span>${stuck}${owner}</div></div></header>

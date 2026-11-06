@@ -77,6 +77,8 @@ export const strings = {
   statBooks: 'ספרים',
   statCheck: 'בדיקת אתמול',
   statTime: 'זמן באפליקציה',
+  statDevice: 'מכשיר',
+  deviceCell: (platforms) => (platforms && platforms.length ? platforms.map((p) => (p === 'ios' ? 'אייפון' : 'אנדרואיד')).join(' + ') : 'לא ידוע'),
   lastEntryLabel: 'הזנה אחרונה',
 
   status: {
